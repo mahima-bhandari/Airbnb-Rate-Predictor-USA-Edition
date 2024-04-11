@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Annual Revenue Predictor</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Background video */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .bg-video video {
+            min-width: 100%;
+            min-height: 100%;
+        }
+
+        /* Form container */
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.6); /* Adjust transparency as needed */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        /* Form elements */
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-video">
+        <video id="background-video" autoplay loop muted>
+            <source src="https://cdn.openai.com/sora/videos/tokyo-walk.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+    </div>
+
+    <div class="container fade-in" id="formContainer">
+        <h1 id="head">Hotel Price Prediction</h1>
+        <form id="inputForm" action="/predict" method="POST">
+            <label for="areaincome">Enter the Average Area Income :</label>
+            <input type="number" id="areaincome" name="areaincome" required>
+
+            <label for="houseage">Enter Average Area House Age :</label>
+            <input type="number" id="houseage" name="houseage" step="1" required>
+
+            <label for="noofrooms">Enter Average Area Number of Rooms :</label>
+            <input type="number" id="noofrooms" name="noofrooms" required>
+
+            <label for="noofbedrooms">Enter Average Area Number of Bedrooms :</label>
+            <input type="number" id="noofbedrooms" name="noofbedrooms" step="1" required>
+
+
+            <label for="areapopulation">Average Area Population :</label>
+            <input type="number" id="areapopulation" name="areapopulation" step="1" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <div id="result">
+            {% if prediction %}
+            Predicted Yearly Amount Spent: ${{ prediction|round(2) }}
+            {% endif %}
+        </div>
+    </div>
+
+
+      
+</body>
+</html>
